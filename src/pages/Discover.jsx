@@ -19,6 +19,7 @@ const Discover = () => {
     //hardcoding genre title
     const genreTitle = 'Electric';
 
+    
     if (isFetching) 
         return <Loader title='Loading'/>;
 
