@@ -9,11 +9,21 @@ import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 
 
 const Discover = () => {
+    // calling api as hook. returns api data, fetching state for load state, and error.
+    const {data, isFetching, error} = useGetTopChartsQuery();
+
     //console logg
     console.log(genres);
+    console.log(data);
 
     //hardcoding genre title
     const genreTitle = 'Electric';
+
+    if (isFetching) 
+        return <Loader title='Loading'/>;
+
+    if (error) 
+        return <Error />;
 
 
     return(
@@ -35,8 +45,8 @@ const Discover = () => {
             </div>
             {/* wrapper div for songs of diff genres */}
             <div className='flex flex-wrap sm:justify-start justify-center gap-8'>
-                {/* mapping songs that are fetched from shazam core api */}
-                {[1,2,3,4,5,6,7,8,9,10].map((song, i)  =>  (
+                {/* mapping songs that are fetched from shazam core api. ?- if data doesn't exist yet. */}
+                {data?.map((song, i)  =>  (
                     // self closing song card component
                     <SongCard 
                         key = {song.key}

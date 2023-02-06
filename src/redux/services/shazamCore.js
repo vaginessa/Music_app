@@ -31,9 +31,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
             },
         }),
-        // endpoints below base query
+        // endpoints below base query. query in endpoint is arrow function that returns string. not string
         endpoints: (builder) => ({
-            getTopCharts: builder.query({ query: '/charts/world'}),
+            getTopCharts: builder.query({ query: () =>  '/charts/world'}),
         }),
     });
 
