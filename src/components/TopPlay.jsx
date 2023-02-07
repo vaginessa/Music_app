@@ -14,12 +14,44 @@ import {playPause, setActiveSong} from '../redux/features/playerSlice';
 import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 import { FreeMode } from 'swiper';
 
-const TopChartCard = ({song, i}) => (
+const TopChartCard = ({song, i, isPlaying, activeSong, handlePauseClick, handlePlayClick}) => (
 
   <div className='w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2'>
 
-    {/* rendering song title */}
-    {song.title}
+    <h3 className='font-bold text-base text-white mr-3'>{i + 1}</h3>
+
+    {/* design wrapper div */}
+    <div className='flex-1 flex flex-row justify-between items-center'>
+      <img className='w-20 h-20 rounded-lg' src={song?.images?.coverart} alt={song?.title} />
+
+      <div className='flex-1 flex flex-col justify-center mx-3'>
+
+        <Link to={`/songs/${song.key}`}>
+
+          <p className='text-xl font-bold text-white'>{song?.title}</p>
+        
+        </Link>
+
+        <Link to={`/artists/${song.artists[0].adamid}`}>
+
+          <p className='text-base font-bold text-red-100'>{song?.subtitle}</p>
+        
+        </Link>
+
+      </div>
+
+    </div>
+
+    {/* calling the playPause component as a self closing tag  */}
+
+    <PlayPause 
+      song = {song}
+      isPlaying = {isPlaying}
+      activeSong = {activeSong}
+      handlePause = {handlePauseClick}
+      handlePlay = {handlePlayClick}
+    
+    />
 
   </div>
 );
@@ -43,7 +75,7 @@ const TopPlay = () => {
 
   };
 
-  const handlePlayClick = ()  => {
+  const handlePlayClick = (song, i)  => {
     dispatch(setActiveSong({song, data, i}));
     dispatch(playPause(true));
 
@@ -76,6 +108,15 @@ const TopPlay = () => {
               song={song}
               key={song.key}
               i={i}
+              isPlaying={isPlaying}
+              activeSong={activeSong}
+              
+              // pulling from song play component
+              handlePauseClick={handlePauseClick}
+
+              // have to call handle play as a callback function with songs and index as parameters.
+              //logic for playing song that you click on in the top of the charts section in the app homepage!
+              handlePlayClick={() =>  handlePlayClick(song, i)}
             />
           ))}
 

@@ -28,7 +28,8 @@ const NavLinks = ({handleClick}) => (
         {item.name}
 
       </NavLink>
-    ))};
+      //no ';' below as it shows on the side navbar!
+    ))}
   </div>
 );
 
