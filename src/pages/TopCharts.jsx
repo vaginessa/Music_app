@@ -16,7 +16,7 @@ const TopCharts = () => {
 
 
 
-    if (isFetching) return <Loader title='Getting top of the charts song' />;
+    if (isFetching) return <Loader title='Fetching Top Charting Songs!'/>;
 
     if (error) return <Error />;
 

@@ -27,7 +27,7 @@ const AroundYou = () => {
 
     }, [country]);
 
-    if (isFetching && loading) return <Loader title='finding songs near you' />;
+    if (isFetching && loading) return <Loader title='Fetching Songs Near You!' />;
 
     if (error && country) return <Error />;
 
