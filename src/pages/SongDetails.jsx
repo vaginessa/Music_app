@@ -29,7 +29,7 @@ const SongDetails = () => {
         
         <div className='flex flex-col'>
 
-            {/* <DetailsHeader songData = {songData} artistId={artistId}/> */}
+            <DetailsHeader songData = {songData} artistId=''/>
 
             <div className='mb-10'>
 
