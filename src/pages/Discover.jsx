@@ -11,24 +11,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 
 
+
+import { selectGenreListId } from '../redux/features/playerSlice';
+
+
+// importing query to filter songs by genre through select drop down
+import { useGetSongsByGenreQuery } from '../redux/services/shazamCore';
+
+
 const Discover = () => {
 
     // hook
     const dispatch = useDispatch();
 
 
-    const {activeSong, isPlaying} = useSelector((state) =>  state.player);
+    const {activeSong, isPlaying, genreListId} = useSelector((state) =>  state.player);
 
 
     // calling api as hook. returns api data, fetching state for load state, and error.
-    const {data, isFetching, error} = useGetTopChartsQuery();
+    const {data, isFetching, error} = useGetSongsByGenreQuery(genreListId || 'POP');
 
     //console logg
     console.log(genres);
     console.log(data);
 
-    //hardcoding genre title
-    const genreTitle = 'Electric';
+    // //hardcoding genre title
+    // const genreTitle = 'Pop';
+
+    const genreTitle = genres.find(({ value })  =>  value === genreListId)?.title;
 
     
     if (isFetching) 
@@ -47,8 +57,8 @@ const Discover = () => {
                 <h2 className='font-bold text-3xl text-red-100 text-left'>Discover {genreTitle}</h2>
                 {/* genre select */}
                 <select
-                    onChange={()    =>  {}}
-                    value = ''
+                    onChange={(event)    => dispatch(selectGenreListId(event.target.value))}
+                    value = {genreListId || 'pop'}
                     className='bg-black text-gray-200 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5'
                 >
                     {genres.map((genre) =>  <option key={genre.value} value={genre.value}>{genre.title}</option>)}
