@@ -36,10 +36,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
             getTopCharts: builder.query({ query: () =>  '/charts/world'}),
             // adding second api endpoint
             getSongDetails: builder.query({ query: ({ songid }) => `/tracks/details?track_id=${songid}` }),
+            //related song query deprecated from v1 to v2!! by rapid API for shazam core API
+            getSongsByCountry: builder.query({ query: (countryCode) => `/charts/country?country_code=${countryCode}`})
         }),
     });
 
     export const{
         useGetTopChartsQuery,
         useGetSongDetailsQuery,
+        // 
+        //
+        useGetSongsByCountryQuery,
     } = shazamCoreApi;

@@ -4,10 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {DetailsHeader, Loader, RelatedSongs, Error} from '../components';
 
 // features from playerSlice
-import { setActiveSong, playPause} from "../redux/features/playerSlice.js";
+import { setActiveSong, playPause} from "../redux/features/playerSlice";
 
 // importing song details query
-import { useGetSongDetailsQuery } from "../redux/services/shazamCore.js";
+import { useGetSongDetailsQuery } from "../redux/services/shazamCore";
 
 
 const SongDetails = () => {
