@@ -41,6 +41,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
             getSongsByCountry: builder.query({ query: (countryCode) => `/charts/country?country_code=${countryCode}`}),
             //endpoint to be able to find songs by using the select drop down menu and filtering by song genre
             getSongsByGenre: builder.query({ query: (genre) => `/charts/genre-world?genre_code=${genre}` }),
+            //implementing the endpoint that allows users to get songs by search 
+            getSongsBySearch: builder.query({ query : (searchTerm)  =>  `/search/multi?search_type=SONGS_ARTISTS&query=${searchTerm}`}),
         }),
     });
 
@@ -51,4 +53,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         //
         useGetSongsByCountryQuery,
         useGetSongsByGenreQuery,
+        //exporting search endpoint as hook... 
+        useGetSongsBySearchQuery,
     } = shazamCoreApi;
