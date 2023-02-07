@@ -3,12 +3,23 @@
 import {Error, Loader, SongCard} from '../components';
 import{genres} from '../assets/constants';
 
+// import redux functions (hooks)
+import { useDispatch, useSelector } from 'react-redux';
+
 
 // importing queries
 import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 
 
 const Discover = () => {
+
+    // hook
+    const dispatch = useDispatch();
+
+
+    const {activeSong, isPlaying} = useSelector((state) =>  state.player);
+
+
     // calling api as hook. returns api data, fetching state for load state, and error.
     const {data, isFetching, error} = useGetTopChartsQuery();
 
@@ -54,6 +65,9 @@ const Discover = () => {
                         song = {song}
                         // i is index
                         i = {i}
+                        isPlaying={isPlaying}
+                        activeSong={activeSong}
+                        data={data}
                     />
                 ))}
             </div>
