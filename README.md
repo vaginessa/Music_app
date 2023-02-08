@@ -7,7 +7,7 @@ Discover new songs through the top charts of shazam (globally or around you!)
 
 Details for artists coming soon. 
 
-Related songs from recently played deprecated (bad url from Rapid API) 
+
 
 
 
